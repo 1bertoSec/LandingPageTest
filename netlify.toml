@@ -1,0 +1,10 @@
+# Deploy no Netlify — nenhuma variável de ambiente é necessária.
+# O @netlify/plugin-nextjs é instalado automaticamente pelo Netlify ao detectar
+# o Next.js, e cuida do runtime do App Router e da otimização de imagens.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"

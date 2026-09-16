@@ -1,0 +1,232 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  /* Cada tema (.theme-v1/v2/v3) redefine --font-heading-family e --font-sans. */
+  --font-heading: var(--font-heading-family, var(--font-sans));
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* ==========================================================================
+   Temas por rota
+   --------------------------------------------------------------------------
+   Cada landing page é envolvida por um destes escopos. Como todos os
+   componentes shadcn leem as variáveis via var(--primary), var(--card), etc.,
+   trocar as variáveis dentro do escopo re-tematiza a página inteira sem
+   duplicar um único componente.
+   ========================================================================== */
+
+/* --- /v1 — Clínico-premium: verde-petróleo escuro, dourado, títulos serifados --- */
+.theme-v1 {
+  --font-sans: var(--font-inter);
+  --font-heading-family: var(--font-cormorant);
+
+  --background: oklch(0.17 0.024 196);
+  --foreground: oklch(0.95 0.008 90);
+  --card: oklch(0.213 0.026 196);
+  --card-foreground: oklch(0.95 0.008 90);
+  --popover: oklch(0.213 0.026 196);
+  --popover-foreground: oklch(0.95 0.008 90);
+  --primary: oklch(0.82 0.085 84);
+  --primary-foreground: oklch(0.2 0.03 84);
+  --secondary: oklch(0.26 0.028 196);
+  --secondary-foreground: oklch(0.95 0.008 90);
+  --muted: oklch(0.24 0.026 196);
+  --muted-foreground: oklch(0.73 0.018 190);
+  --accent: oklch(0.28 0.032 196);
+  --accent-foreground: oklch(0.95 0.008 90);
+  --destructive: oklch(0.62 0.18 25);
+  --border: oklch(0.95 0.008 90 / 12%);
+  --input: oklch(0.95 0.008 90 / 16%);
+  --ring: oklch(0.82 0.085 84 / 60%);
+  --radius: 0.25rem;
+}
+
+/* --- /v2 — Acolhedor-humano: claro, nude/pastel, tipografia arredondada --- */
+.theme-v2 {
+  --font-sans: var(--font-nunito);
+  --font-heading-family: var(--font-quicksand);
+
+  --background: oklch(0.985 0.008 68);
+  --foreground: oklch(0.32 0.024 38);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.32 0.024 38);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.32 0.024 38);
+  --primary: oklch(0.66 0.084 28);
+  --primary-foreground: oklch(0.99 0.006 68);
+  --secondary: oklch(0.945 0.021 62);
+  --secondary-foreground: oklch(0.38 0.03 38);
+  --muted: oklch(0.955 0.015 62);
+  --muted-foreground: oklch(0.53 0.026 40);
+  --accent: oklch(0.92 0.033 52);
+  --accent-foreground: oklch(0.36 0.034 38);
+  --destructive: oklch(0.6 0.19 25);
+  --border: oklch(0.89 0.018 52);
+  --input: oklch(0.89 0.018 52);
+  --ring: oklch(0.66 0.084 28 / 45%);
+  --radius: 1.25rem;
+}
+
+/* --- /v3 — Moderno-tech: escuro azulado, ciano elétrico, tipografia geométrica --- */
+.theme-v3 {
+  --font-sans: var(--font-inter);
+  --font-heading-family: var(--font-space-grotesk);
+
+  --background: oklch(0.145 0.022 264);
+  --foreground: oklch(0.97 0.006 264);
+  --card: oklch(0.192 0.026 264);
+  --card-foreground: oklch(0.97 0.006 264);
+  --popover: oklch(0.192 0.026 264);
+  --popover-foreground: oklch(0.97 0.006 264);
+  --primary: oklch(0.82 0.15 178);
+  --primary-foreground: oklch(0.16 0.03 200);
+  --secondary: oklch(0.25 0.034 264);
+  --secondary-foreground: oklch(0.97 0.006 264);
+  --muted: oklch(0.232 0.03 264);
+  --muted-foreground: oklch(0.72 0.022 264);
+  --accent: oklch(0.62 0.2 292);
+  --accent-foreground: oklch(0.98 0.005 292);
+  --destructive: oklch(0.65 0.2 25);
+  --border: oklch(0.97 0.006 264 / 12%);
+  --input: oklch(0.97 0.006 264 / 16%);
+  --ring: oklch(0.82 0.15 178 / 55%);
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer utilities {
+  /* Respeita quem pediu menos animação no sistema operacional. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
