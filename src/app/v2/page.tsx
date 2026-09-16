@@ -16,6 +16,7 @@ import {
   WhatsAppIcon,
 } from "@/components/site/brand-icons";
 import { MapPlaceholder } from "@/components/site/map-placeholder";
+import { Reveal } from "@/components/site/reveal";
 import { cn } from "@/lib/utils";
 import { ServiceIcon } from "@/components/site/service-icon";
 import { StockImage } from "@/components/site/stock-image";
@@ -257,10 +258,10 @@ export default function V2Page() {
               vazia, a página passa a dizer o que é principal.
             */}
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {services.slice(0, 2).map((service) => (
+              {services.slice(0, 2).map((service, i) => (
+                <Reveal key={service.slug} variant="warm" delay={i * 0.08} className="sm:col-span-2">
                 <Card
-                  key={service.slug}
-                  className="group overflow-hidden rounded-[2rem] border-border/70 bg-card py-0 shadow-sm transition-shadow hover:shadow-lg sm:col-span-2"
+                  className="group h-full overflow-hidden rounded-[2rem] border-border/70 bg-card py-0 shadow-sm transition-shadow hover:shadow-lg"
                 >
                   <div className="relative aspect-[16/9] overflow-hidden">
                     {/* TODO: substituir por foto autorizada da clínica */}
@@ -285,12 +286,13 @@ export default function V2Page() {
                     </p>
                   </CardContent>
                 </Card>
+                </Reveal>
               ))}
 
-              {services.slice(2).map((service) => (
+              {services.slice(2).map((service, i) => (
+                <Reveal key={service.slug} variant="warm" delay={Math.min(i, 4) * 0.07}>
                 <Card
-                  key={service.slug}
-                  className="rounded-[1.5rem] border-border/70 bg-card py-0 shadow-sm transition-shadow hover:shadow-md"
+                  className="h-full rounded-[1.5rem] border-border/70 bg-card py-0 shadow-sm transition-shadow hover:shadow-md"
                 >
                   <CardContent className="flex h-full flex-col gap-2.5 p-6">
                     <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
@@ -304,6 +306,7 @@ export default function V2Page() {
                     </p>
                   </CardContent>
                 </Card>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -328,10 +331,10 @@ export default function V2Page() {
             </div>
 
             <div className="mt-12 grid gap-6 lg:grid-cols-2">
-              {technologies.map((tech) => (
+              {technologies.map((tech, i) => (
+                <Reveal key={tech.name} variant="warm" delay={i * 0.1}>
                 <Card
-                  key={tech.name}
-                  className="overflow-hidden rounded-[2rem] border-border/70 bg-card py-0 shadow-sm"
+                  className="h-full overflow-hidden rounded-[2rem] border-border/70 bg-card py-0 shadow-sm"
                 >
                   <div className="relative aspect-[16/9] overflow-hidden">
                     {/* TODO: substituir por foto autorizada da clínica (equipamento real) */}
@@ -362,6 +365,7 @@ export default function V2Page() {
                     </ul>
                   </CardContent>
                 </Card>
+                </Reveal>
               ))}
             </div>
 

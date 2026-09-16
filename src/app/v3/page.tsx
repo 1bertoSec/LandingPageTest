@@ -293,7 +293,7 @@ export default function V3Page() {
               Fecha exatamente em 3 linhas, sem a célula órfã que a grade de
               3 colunas deixava — e o destaque passa a ser informação.
             */}
-            <Reveal className="mt-14">
+            <Reveal variant="tech" className="mt-14">
               <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border lg:grid-cols-4">
                 {services.map((service, index) => {
                   const featured = index < 2;
@@ -376,7 +376,7 @@ export default function V3Page() {
               </p>
             </div>
 
-            <Reveal className="mt-14">
+            <Reveal variant="tech" className="mt-14">
              <div className="grid gap-6 lg:grid-cols-2">
               {technologies.map((tech, index) => (
                 <Card

@@ -6,27 +6,33 @@ import { cn } from "@/lib/utils";
 
 /**
  * Wrapper do componente SplitText do React Bits (src/components/SplitText.tsx),
- * usado no hero da /v3 para a entrada do título caractere a caractere.
+ * usado no hero da /v3 para a entrada do título.
  *
- * Duas decisões importantes aqui:
+ * Três estados, nesta ordem:
  *
- * 1. Renderiza sempre dentro de um <span class="block">, porque o SplitText
- *    aplica `inline-block` em si mesmo. Sem o wrapper, duas linhas do mesmo
- *    título disputariam a mesma linha de texto dependendo da largura da tela.
+ *   "static"  — antes de conhecer a preferência do usuário (inclui o HTML do
+ *               servidor). O texto já está visível: nunca deixamos um título
+ *               presente e invisível esperando JavaScript.
+ *   "split"   — movimento completo, caractere a caractere via GSAP.
+ *   "fade-in" / "fade-done" — com `prefers-reduced-motion: reduce`, o título
+ *               não se divide (isso é movimento), mas entra com um fade de
+ *               opacidade. Zerar toda a animação deixava o hero inerte para
+ *               quem tem a preferência ligada — comum em Windows corporativo.
  *
- * 2. O conteúdo é phrasing content (span), então o chamador é quem coloca o
- *    <h1> em volta — mantém a semântica correta e permite animar duas linhas
- *    dentro de um único heading.
+ * Duas decisões de estrutura:
  *
- * O SplitText anima a partir de `opacity: 0`. Se a animação não puder rodar
- * (usuário com "prefers-reduced-motion", ou o GSAP falhar em carregar), o texto
- * ficaria invisível — por isso renderizamos o texto estático nesses casos em
- * vez de confiar no fallback do próprio componente.
+ * 1. Renderiza dentro de <span class="block">, porque o SplitText aplica
+ *    `inline-block` em si mesmo; sem isso duas linhas do mesmo título
+ *    disputariam a mesma linha de texto.
+ * 2. O conteúdo é phrasing content, então quem põe o <h1> em volta é o
+ *    chamador — permite animar duas linhas dentro de um único heading.
  *
  * Evite gradiente com `bg-clip-text` no texto animado: o GSAP transforma cada
  * caractere em um span com `transform`, e o recorte do fundo não atravessa
  * esses filhos transformados. Use cor sólida.
  */
+type State = "static" | "split";
+
 export function AnimatedHeadline({
   text,
   className,
@@ -39,15 +45,16 @@ export function AnimatedHeadline({
   /** Atraso inicial, em ms, para encadear duas linhas do mesmo título. */
   splitDelayMs?: number;
 }) {
-  const [animate, setAnimate] = useState(false);
+  const [state, setState] = useState<State>("static");
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setTimeout(() => setAnimate(true), splitDelayMs);
-    return () => window.clearTimeout(timer);
+
+    const t = window.setTimeout(() => setState("split"), splitDelayMs);
+    return () => window.clearTimeout(t);
   }, [splitDelayMs]);
 
-  if (!animate) {
+  if (state !== "split") {
     return <span className={cn("block", className)}>{text}</span>;
   }
 

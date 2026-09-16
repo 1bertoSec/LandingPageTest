@@ -218,7 +218,12 @@
 }
 
 @layer utilities {
-  /* Respeita quem pediu menos animação no sistema operacional. */
+  /*
+    Respeita quem pediu menos animação no sistema operacional. Nesse modo a
+    /v3 troca o shader do Aurora por um gradiente estático equivalente e mantém
+    o CountUp, que não envolve movimento espacial — a página continua com
+    identidade própria sem impor movimento a quem pediu o contrário.
+  */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

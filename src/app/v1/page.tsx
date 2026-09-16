@@ -15,6 +15,7 @@ import {
   WhatsAppIcon,
 } from "@/components/site/brand-icons";
 import { MapPlaceholder } from "@/components/site/map-placeholder";
+import { Reveal } from "@/components/site/reveal";
 import { ServiceIcon } from "@/components/site/service-icon";
 import { StockImage } from "@/components/site/stock-image";
 import {
@@ -230,6 +231,7 @@ export default function V1Page() {
             <ol className="mt-14">
               {services.map((service, index) => (
                 <li key={service.slug}>
+                 <Reveal variant="sober" delay={Math.min(index, 5) * 0.06}>
                   <article className="group grid grid-cols-[2.5rem_minmax(0,1fr)] items-baseline gap-x-4 gap-y-2 border-t border-border/60 py-7 transition-colors hover:border-primary/40 sm:grid-cols-[3.5rem_minmax(0,0.9fr)_minmax(0,1.1fr)] sm:gap-x-8 lg:grid-cols-[4.5rem_minmax(0,0.8fr)_minmax(0,1.2fr)]">
                     <span
                       aria-hidden
@@ -250,6 +252,7 @@ export default function V1Page() {
                       {service.short}
                     </p>
                   </article>
+                 </Reveal>
                 </li>
               ))}
             </ol>
@@ -276,10 +279,8 @@ export default function V1Page() {
 
             <div className="mt-14 space-y-px">
               {technologies.map((tech, index) => (
-                <article
-                  key={tech.name}
-                  className="grid items-center gap-8 border-t border-border/60 py-12 lg:grid-cols-2 lg:gap-16"
-                >
+                <Reveal variant="sober" key={tech.name}>
+                <article className="grid items-center gap-8 border-t border-border/60 py-12 lg:grid-cols-2 lg:gap-16">
                   <div
                     className={
                       index % 2 === 1 ? "lg:order-2" : undefined
@@ -321,6 +322,7 @@ export default function V1Page() {
                     />
                   </div>
                 </article>
+                </Reveal>
               ))}
             </div>
 
@@ -329,6 +331,7 @@ export default function V1Page() {
               não quatro cards iguais lado a lado: o título fica na coluna
               estreita e o texto na larga, criando leitura horizontal.
             */}
+            <Reveal variant="sober">
             <dl className="mt-16 border-t border-border/60">
               {differentials.map((item) => (
                 <div
@@ -350,6 +353,7 @@ export default function V1Page() {
                 </div>
               ))}
             </dl>
+            </Reveal>
           </div>
         </section>
 

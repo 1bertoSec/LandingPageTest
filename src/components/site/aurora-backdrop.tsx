@@ -28,11 +28,13 @@ export function AuroraBackdrop() {
   }, []);
 
   if (!enabled) {
+    // Sem o shader, o fundo do hero ficava chapado. Duas manchas de cor
+    // sobrepostas dão a mesma leitura visual do Aurora, sem nada em movimento.
     return (
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--color-primary)_0%,transparent_55%)] opacity-25"
-      />
+      <div aria-hidden className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-1/3 left-1/2 size-[140%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,var(--color-primary)_0%,transparent_60%)] opacity-30" />
+        <div className="absolute -top-1/4 left-[15%] size-[90%] bg-[radial-gradient(ellipse_at_center,var(--color-accent)_0%,transparent_65%)] opacity-25" />
+      </div>
     );
   }
 
