@@ -5,6 +5,8 @@ export const metadata: Metadata = {
   title: "Acolhedor-humano (V2)",
   description:
     "Espaço DuoVitta — proposta visual V2: clara, em tons nude, com tom próximo e caloroso.",
+  // Ver nota em src/app/v1/layout.tsx.
+  robots: { index: false, follow: false },
 };
 
 export default function V2Layout({ children }: LayoutProps<"/v2">) {

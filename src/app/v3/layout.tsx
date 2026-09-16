@@ -5,6 +5,8 @@ export const metadata: Metadata = {
   title: "Moderno-tech (V3)",
   description:
     "Espaço DuoVitta — proposta visual V3: ousada, escura, com componentes animados reforçando tecnologia e ciência.",
+  // Ver nota em src/app/v1/layout.tsx.
+  robots: { index: false, follow: false },
 };
 
 export default function V3Layout({ children }: LayoutProps<"/v3">) {
