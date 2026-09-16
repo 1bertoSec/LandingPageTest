@@ -16,6 +16,7 @@ import {
   WhatsAppIcon,
 } from "@/components/site/brand-icons";
 import { MapPlaceholder } from "@/components/site/map-placeholder";
+import { cn } from "@/lib/utils";
 import { ServiceIcon } from "@/components/site/service-icon";
 import { StockImage } from "@/components/site/stock-image";
 import {
@@ -249,30 +250,55 @@ export default function V2Page() {
               </p>
             </div>
 
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {services.map((service) => (
+            {/*
+              Bento em vez de 10 cards iguais: os dois carros-chefe (CO2 e
+              Ultraformer) ocupam o dobro do espaço e ficam com foto grande; os
+              outros oito viram cards compactos. Além de não sobrar célula
+              vazia, a página passa a dizer o que é principal.
+            */}
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {services.slice(0, 2).map((service) => (
                 <Card
                   key={service.slug}
-                  className="group overflow-hidden rounded-[1.75rem] border-border/70 bg-card py-0 shadow-sm transition-shadow hover:shadow-lg"
+                  className="group overflow-hidden rounded-[2rem] border-border/70 bg-card py-0 shadow-sm transition-shadow hover:shadow-lg sm:col-span-2"
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden">
+                  <div className="relative aspect-[16/9] overflow-hidden">
                     {/* TODO: substituir por foto autorizada da clínica */}
                     <StockImage
                       src={service.image}
                       alt={service.imageAlt}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       className="transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
-                  <CardContent className="flex flex-col gap-3 px-6 pb-7 pt-5">
-                    <div className="flex items-center gap-2.5">
-                      <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                        <ServiceIcon name={service.icon} className="size-4.5" />
+                  <CardContent className="flex flex-col gap-3 px-7 pb-8 pt-6">
+                    <div className="flex items-center gap-3">
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                        <ServiceIcon name={service.icon} className="size-5" />
                       </span>
-                      <h3 className="font-heading text-lg font-bold leading-snug">
+                      <h3 className="font-heading text-2xl font-bold leading-snug">
                         {service.name}
                       </h3>
                     </div>
+                    <p className="text-[0.95rem] leading-relaxed text-muted-foreground">
+                      {service.short}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+
+              {services.slice(2).map((service) => (
+                <Card
+                  key={service.slug}
+                  className="rounded-[1.5rem] border-border/70 bg-card py-0 shadow-sm transition-shadow hover:shadow-md"
+                >
+                  <CardContent className="flex h-full flex-col gap-2.5 p-6">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                      <ServiceIcon name={service.icon} className="size-4.5" />
+                    </span>
+                    <h3 className="mt-1 font-heading text-base font-bold leading-snug">
+                      {service.name}
+                    </h3>
                     <p className="text-sm leading-relaxed text-muted-foreground">
                       {service.short}
                     </p>
@@ -380,21 +406,33 @@ export default function V2Page() {
               )}
             </div>
 
-            <div className="mt-10 grid gap-5 lg:grid-cols-3">
-              {testimonials.map((testimonial) => (
+            {/* O primeiro depoimento ocupa duas colunas — leitura com entrada. */}
+            <div className="mt-10 grid gap-5 lg:grid-cols-4">
+              {testimonials.map((testimonial, index) => (
                 <figure
                   key={testimonial.quote.slice(0, 50)}
-                  // min-w-0: os nomes usam `truncate` (white-space: nowrap), que
-                  // define um min-content maior que a coluna. Sem isso o card
-                  // estoura a tela na largura de celular.
-                  className="flex min-w-0 flex-col rounded-[1.75rem] bg-card p-7 shadow-sm ring-1 ring-border/70"
+                  // min-w-0 evita que o card estoure a largura no celular.
+                  className={cn(
+                    "flex min-w-0 flex-col rounded-[1.75rem] bg-card p-7 shadow-sm ring-1 ring-border/70",
+                    index === 0 && "lg:col-span-2 lg:bg-accent/40 lg:p-9",
+                  )}
                 >
                   <Quote
-                    className="size-7 text-primary/45"
+                    className={cn(
+                      "text-primary/45",
+                      index === 0 ? "size-9" : "size-7",
+                    )}
                     strokeWidth={1.5}
                     aria-hidden
                   />
-                  <blockquote className="mt-4 flex-1 text-[0.95rem] leading-relaxed text-foreground/90">
+                  <blockquote
+                    className={cn(
+                      "mt-4 flex-1 leading-relaxed text-foreground/90",
+                      index === 0
+                        ? "text-base sm:text-lg"
+                        : "text-[0.95rem]",
+                    )}
+                  >
                     {testimonial.quote}
                   </blockquote>
                   <figcaption className="mt-6 flex items-center gap-3 border-t border-border/70 pt-5">

@@ -324,22 +324,32 @@ export default function V1Page() {
               ))}
             </div>
 
-            <div className="mt-8 grid gap-px border-t border-border/60 pt-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            {/*
+              Os diferenciais viram uma lista de duas colunas com régua fina,
+              não quatro cards iguais lado a lado: o título fica na coluna
+              estreita e o texto na larga, criando leitura horizontal.
+            */}
+            <dl className="mt-16 border-t border-border/60">
               {differentials.map((item) => (
-                <div key={item.title} className="py-4">
-                  <ServiceIcon
-                    name={item.icon}
-                    className="size-5 text-primary"
-                  />
-                  <h3 className="mt-4 font-heading text-xl font-light">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <div
+                  key={item.title}
+                  className="grid gap-x-8 gap-y-2 border-b border-border/60 py-7 sm:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]"
+                >
+                  <dt className="flex items-start gap-3">
+                    <ServiceIcon
+                      name={item.icon}
+                      className="mt-1 size-4 shrink-0 text-primary"
+                    />
+                    <span className="font-heading text-xl font-light leading-snug">
+                      {item.title}
+                    </span>
+                  </dt>
+                  <dd className="text-sm leading-relaxed text-muted-foreground">
                     {item.description}
-                  </p>
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </div>
         </section>
 
@@ -363,25 +373,52 @@ export default function V1Page() {
               </p>
             )}
 
-            <div className="mt-12 grid gap-10 lg:grid-cols-3">
-              {testimonials.map((testimonial) => (
-                <figure
-                  key={testimonial.quote.slice(0, 50)}
-                  className="border-t border-primary/40 pt-7"
-                >
-                  <blockquote className="font-heading text-lg font-light italic leading-relaxed text-foreground/90">
-                    {testimonial.quote}
-                  </blockquote>
-                  <figcaption className="mt-6 text-sm">
+            {/*
+              O primeiro depoimento vira citação em escala grande e os outros
+              dois ficam em coluna menor ao lado. Três colunas idênticas davam
+              o mesmo peso a tudo — aqui existe uma entrada principal.
+            */}
+            <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-20">
+              <figure className="border-t border-primary/40 pt-8">
+                <blockquote className="font-heading text-2xl font-light italic leading-[1.45] text-foreground/95 sm:text-[1.75rem]">
+                  {testimonials[0].quote}
+                </blockquote>
+                <figcaption className="mt-7 flex items-baseline gap-3 text-sm">
+                  <span
+                    aria-hidden
+                    className="h-px w-8 shrink-0 translate-y-[-0.25rem] bg-primary"
+                  />
+                  <span>
                     <span className="block font-medium">
-                      {testimonial.author}
+                      {testimonials[0].author}
                     </span>
                     <span className="mt-0.5 block text-muted-foreground">
-                      {testimonial.detail}
+                      {testimonials[0].detail}
                     </span>
-                  </figcaption>
-                </figure>
-              ))}
+                  </span>
+                </figcaption>
+              </figure>
+
+              <div className="flex flex-col gap-10 lg:pt-8">
+                {testimonials.slice(1).map((testimonial) => (
+                  <figure
+                    key={testimonial.quote.slice(0, 50)}
+                    className="border-t border-border/60 pt-7"
+                  >
+                    <blockquote className="text-[0.95rem] leading-relaxed text-muted-foreground">
+                      {testimonial.quote}
+                    </blockquote>
+                    <figcaption className="mt-5 text-sm">
+                      <span className="block font-medium text-foreground/90">
+                        {testimonial.author}
+                      </span>
+                      <span className="mt-0.5 block text-xs text-muted-foreground">
+                        {testimonial.detail}
+                      </span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -390,7 +427,7 @@ export default function V1Page() {
         {/* Dúvidas frequentes (accordion shadcn)                            */}
         {/* ---------------------------------------------------------------- */}
         <section className="border-t border-border/60 px-5 py-20 sm:px-8 sm:py-28">
-          <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
+          <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
             <div>
               <SectionLabel>Dúvidas frequentes</SectionLabel>
               <h2 className="mt-5 font-heading text-4xl font-light leading-tight sm:text-5xl">

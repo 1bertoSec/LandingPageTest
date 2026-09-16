@@ -18,6 +18,8 @@ import {
   WhatsAppIcon,
 } from "@/components/site/brand-icons";
 import { MapPlaceholder } from "@/components/site/map-placeholder";
+import { Reveal, Stat } from "@/components/site/reveal";
+import { cn } from "@/lib/utils";
 import { ServiceIcon } from "@/components/site/service-icon";
 import { StockImage } from "@/components/site/stock-image";
 import {
@@ -36,11 +38,13 @@ import {
 /* -------------------------------------------------------------------------- */
 /*  V3 — "Moderno-tech"                                                       */
 /*  Escuro azulado, ciano elétrico + violeta, tipografia geométrica.           */
-/*  Dois componentes animados do React Bits no hero:                           */
-/*    - Aurora  (shader WebGL de fundo, via <AuroraBackdrop />)                 */
-/*    - SplitText (entrada do título caractere a caractere, via                 */
-/*                <AnimatedHeadline />)                                        */
-/*  Ambos com fallback para prefers-reduced-motion.                            */
+/*  Componentes animados do React Bits, todos com fallback para                */
+/*  prefers-reduced-motion:                                                    */
+/*    - Aurora          shader WebGL de fundo do hero (<AuroraBackdrop />)      */
+/*    - SplitText       título entrando caractere a caractere                   */
+/*                      (<AnimatedHeadline />)                                  */
+/*    - CountUp         números do hero contando ao entrar na tela (<Stat />)   */
+/*    - AnimatedContent entrada dos blocos ao rolar (<Reveal />)                */
 /* -------------------------------------------------------------------------- */
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -157,6 +161,29 @@ export default function V3Page() {
                   ),
                 )}
               </div>
+
+              {/* React Bits · CountUp — os números contam ao entrar na tela. */}
+              <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8">
+                {[
+                  { to: 10, suffix: "", label: "tratamentos" },
+                  { to: 2, suffix: "", label: "tecnologias de ponta" },
+                  { to: 100, suffix: "%", label: "protocolo individual" },
+                ].map((stat) => (
+                  <div key={stat.label}>
+                    <dt className="sr-only">{stat.label}</dt>
+                    <dd>
+                      <Stat
+                        to={stat.to}
+                        suffix={stat.suffix}
+                        className="block font-heading text-3xl font-bold tabular-nums text-primary sm:text-4xl"
+                      />
+                      <span className="mt-1.5 block text-[0.7rem] uppercase tracking-[0.15em] text-muted-foreground">
+                        {stat.label}
+                      </span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           </div>
         </section>
@@ -260,31 +287,68 @@ export default function V3Page() {
               </p>
             </div>
 
-            <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-              {services.map((service, index) => (
-                <Card
-                  key={service.slug}
-                  className="group relative rounded-none border-0 bg-card shadow-none transition-colors hover:bg-secondary/60"
-                >
-                  <CardContent className="flex h-full flex-col gap-4 p-7">
-                    <div className="flex items-start justify-between">
-                      <span className="flex size-11 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary transition-shadow group-hover:shadow-[0_0_20px_-4px_var(--color-primary)]">
-                        <ServiceIcon name={service.icon} className="size-5" />
-                      </span>
-                      <span className="font-heading text-xs tabular-nums text-muted-foreground/60">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                    <h3 className="font-heading text-lg font-semibold leading-snug">
-                      {service.name}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      {service.short}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            {/*
+              Bento de 4 colunas: os 2 carros-chefe ocupam 2 colunas cada
+              (1 linha cheia) e os 8 restantes ocupam 1 (2 linhas cheias).
+              Fecha exatamente em 3 linhas, sem a célula órfã que a grade de
+              3 colunas deixava — e o destaque passa a ser informação.
+            */}
+            <Reveal className="mt-14">
+              <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border lg:grid-cols-4">
+                {services.map((service, index) => {
+                  const featured = index < 2;
+                  return (
+                    <Card
+                      key={service.slug}
+                      className={cn(
+                        "group relative rounded-none border-0 bg-card shadow-none transition-colors hover:bg-secondary/60",
+                        featured ? "col-span-2" : "col-span-1",
+                      )}
+                    >
+                      <CardContent
+                        className={cn(
+                          "flex h-full flex-col gap-3",
+                          featured ? "gap-4 p-8" : "p-6",
+                        )}
+                      >
+                        <div className="flex items-start justify-between">
+                          <span
+                            className={cn(
+                              "flex items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary transition-shadow group-hover:shadow-[0_0_20px_-4px_var(--color-primary)]",
+                              featured ? "size-12" : "size-10",
+                            )}
+                          >
+                            <ServiceIcon
+                              name={service.icon}
+                              className={featured ? "size-6" : "size-5"}
+                            />
+                          </span>
+                          <span className="font-heading text-xs tabular-nums text-muted-foreground/60">
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                        </div>
+                        <h3
+                          className={cn(
+                            "font-heading font-semibold leading-snug",
+                            featured ? "text-2xl" : "text-base",
+                          )}
+                        >
+                          {service.name}
+                        </h3>
+                        <p
+                          className={cn(
+                            "leading-relaxed text-muted-foreground",
+                            featured ? "text-[0.95rem]" : "text-sm",
+                          )}
+                        >
+                          {service.short}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -312,7 +376,8 @@ export default function V3Page() {
               </p>
             </div>
 
-            <div className="mt-14 grid gap-6 lg:grid-cols-2">
+            <Reveal className="mt-14">
+             <div className="grid gap-6 lg:grid-cols-2">
               {technologies.map((tech, index) => (
                 <Card
                   key={tech.name}
@@ -355,7 +420,8 @@ export default function V3Page() {
                   </CardContent>
                 </Card>
               ))}
-            </div>
+             </div>
+            </Reveal>
           </div>
         </section>
 
