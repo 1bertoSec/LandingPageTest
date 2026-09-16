@@ -56,21 +56,23 @@ fallback para `prefers-reduced-motion`:
 > O SplitText depende do plugin `SplitText` do GSAP, gratuito para uso comercial
 > desde o GSAP 3.13.
 
-### 21st.dev — não instalado
+### Por que não usamos o 21st.dev
 
-A regra original pedia os componentes de estrutura via CLI do 21st.dev. **O
-registry do 21st.dev passou a exigir autenticação** e responde `403
-authentication_required` a qualquer `npx shadcn add https://21st.dev/r/...`,
-inclusive nos componentes públicos. Não há chave no ambiente, e o plano gratuito
-limita a 2 instalações por dia.
+O plano inicial previa os componentes de estrutura via CLI do 21st.dev, mas o
+registry deles passou a exigir autenticação: qualquer
+`npx shadcn add https://21st.dev/r/...` responde `403
+authentication_required`, mesmo em componentes públicos. A chave sai de
+<https://21st.dev/mcp> e o plano gratuito limita a 2 instalações por dia.
 
-Os componentes de estrutura foram instalados do **registry oficial do
-shadcn/ui** — a mesma base sobre a qual o 21st.dev distribui. Para trocar por
-blocos do 21st.dev depois, gere uma chave em <https://21st.dev/mcp> e rode:
+**Decisão: seguir sem o 21st.dev.** Os componentes vêm do registry oficial do
+shadcn/ui — que é a mesma base sobre a qual o 21st.dev distribui, então não há
+perda de qualidade nos primitivos (`button`, `card`, `accordion`, `badge`,
+`separator`). O que o 21st.dev agregaria seriam blocos prontos mais elaborados,
+não esses primitivos.
 
-```bash
-npx shadcn@latest add "https://21st.dev/r/<autor>/<componente>"
-```
+Se um dia fizer sentido puxar um bloco de lá, o caminho é gerar a chave e rodar
+`npx shadcn@latest add "https://21st.dev/r/<autor>/<componente>"` — nada na
+estrutura atual impede isso.
 
 ## Pendências antes de publicar
 
