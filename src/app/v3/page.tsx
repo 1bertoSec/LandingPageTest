@@ -27,6 +27,8 @@ import {
   openingHours,
   services,
   technologies,
+  TESTIMONIALS_ARE_FICTIONAL,
+  TESTIMONIALS_DISCLAIMER,
   testimonials,
   whatsappUrl,
 } from "@/lib/clinic";
@@ -367,7 +369,17 @@ export default function V3Page() {
               Resultado que se conta
             </h2>
 
-            <div className="mt-14 grid gap-5 lg:grid-cols-3">
+            {/* Aviso obrigatório enquanto os depoimentos forem fictícios. */}
+            {TESTIMONIALS_ARE_FICTIONAL && (
+              <p className="mt-6 max-w-2xl rounded-lg border border-primary/25 bg-primary/10 px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+                <span className="font-heading font-semibold uppercase tracking-wider text-primary">
+                  Conteúdo fictício ·{" "}
+                </span>
+                {TESTIMONIALS_DISCLAIMER}
+              </p>
+            )}
+
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
               {testimonials.map((testimonial) => (
                 <figure
                   key={testimonial.quote.slice(0, 50)}

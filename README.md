@@ -79,9 +79,21 @@ estrutura atual impede isso.
 | O quê                                                                             | Onde                                                                     |
 | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | **Fotos** — todas de banco de imagens livre (Unsplash), nenhuma é de paciente      | cada uso tem `// TODO: substituir por foto autorizada da clínica`         |
-| **Depoimentos** — fictícios, marcados `[PLACEHOLDER]`                              | `testimonials` em `src/lib/clinic.ts`                                     |
+| **Depoimentos** — fictícios; a seção exibe aviso visível enquanto for assim         | `testimonials` em `src/lib/clinic.ts` (ver nota abaixo)                    |
 | **Horário de funcionamento** — suposição, marcada como placeholder                 | `openingHours` em `src/lib/clinic.ts`                                     |
 | **Mapa** — placeholder no lugar do embed                                           | `src/components/site/map-placeholder.tsx` (instruções no comentário)      |
+
+### Sobre os depoimentos
+
+Os três depoimentos são **fictícios** — escritos para a apresentação, com
+pessoas que não existem. Enquanto `TESTIMONIALS_ARE_FICTIONAL` for `true`, as
+três versões exibem um aviso visível de "conteúdo fictício" junto da seção.
+
+Isso não é zelo excessivo: publicar depoimento inventado como se fosse real é
+publicidade enganosa (CDC art. 37 e Código do CONAR), e o risco cresce em
+publicidade de saúde. Ao trocar pelos relatos reais — com autorização por
+escrito de cada paciente — mude a flag para `false` e o aviso some das três
+páginas de uma vez.
 
 Quando o cliente escolher uma versão: remova as outras duas rotas, o
 `VersionSwitcher` e a página índice, e promova a escolhida para `/`.

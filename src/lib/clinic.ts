@@ -285,27 +285,40 @@ export type Testimonial = {
 };
 
 /**
- * Depoimentos fictícios apenas para diagramação.
- * TODO: substituir por depoimento real com autorização por escrito antes de publicar.
+ * ATENÇÃO — CONTEÚDO FICTÍCIO.
+ *
+ * Estes depoimentos foram escritos apenas para diagramação: as pessoas não
+ * existem e nenhuma delas foi atendida na clínica. Publicar depoimento
+ * inventado como se fosse real configura publicidade enganosa (CDC art. 37 e
+ * Código do CONAR), então a página exibe o aviso de `TESTIMONIALS_DISCLAIMER`
+ * junto da seção enquanto eles estiverem aqui.
+ *
+ * TODO: substituir por depoimentos reais, com autorização por escrito de cada
+ * paciente, e remover o aviso.
  */
+export const TESTIMONIALS_ARE_FICTIONAL = true;
+
+export const TESTIMONIALS_DISCLAIMER =
+  "Depoimentos ilustrativos, escritos apenas para esta apresentação. Substituir por relatos reais, com autorização por escrito, antes de publicar.";
+
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "[PLACEHOLDER - substituir por depoimento real] Fui muito bem acolhida desde a primeira avaliação. Me explicaram cada etapa do tratamento e o que era realista esperar.",
-    author: "[PLACEHOLDER] Nome da paciente",
-    detail: "[PLACEHOLDER] Tratamento realizado",
+      "Cheguei insegura, achando que ia ouvir uma proposta de pacote fechado. Foi o contrário: a Dra. Graciele olhou minha pele, perguntou da minha rotina e me explicou por que um dos procedimentos que eu queria não fazia sentido para o meu caso agora. Essa honestidade me ganhou.",
+    author: "Mariana R.",
+    detail: "Avaliação e protocolo de despigmentação",
   },
   {
     quote:
-      "[PLACEHOLDER - substituir por depoimento real] O que mais me marcou foi a segurança técnica. Saí de cada sessão entendendo exatamente o que tinha sido feito na minha pele.",
-    author: "[PLACEHOLDER] Nome da paciente",
-    detail: "[PLACEHOLDER] Tratamento realizado",
+      "O que mais me marcou foi entender o que estava acontecendo. Antes de cada sessão ela explicava o que o aparelho faz na pele e o que eu ia sentir. Saí de todas sabendo exatamente o que tinha sido feito — e as orientações de pós vieram por escrito.",
+    author: "Camila S.",
+    detail: "CO2 Fracionado",
   },
   {
     quote:
-      "[PLACEHOLDER - substituir por depoimento real] Recuperei a confiança de sair sem maquiagem. O acompanhamento no pós fez toda a diferença para mim.",
-    author: "[PLACEHOLDER] Nome da paciente",
-    detail: "[PLACEHOLDER] Tratamento realizado",
+      "Fiz o acompanhamento pós-operatório aqui por indicação do meu cirurgião. O que me deu segurança foi o cuidado com o tempo: nada foi apressado, e sempre que tive dúvida entre as sessões eu consegui resposta no WhatsApp.",
+    author: "Patrícia L.",
+    detail: "Cuidados pós-operatório",
   },
 ];
 

@@ -119,7 +119,11 @@ export default function HomePage() {
             Trocar as fotos de banco de imagens pelas fotos autorizadas da
             clínica (cada ponto está marcado com <code>TODO</code>).
           </li>
-          <li>Substituir os depoimentos [PLACEHOLDER] por depoimentos reais.</li>
+          <li>
+            Substituir os depoimentos fictícios por relatos reais com
+            autorização por escrito — e então remover o aviso de
+            &ldquo;conteúdo fictício&rdquo; da seção.
+          </li>
           <li>Confirmar o horário de funcionamento e inserir o embed do mapa.</li>
         </ul>
       </div>

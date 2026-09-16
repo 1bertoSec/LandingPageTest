@@ -26,6 +26,8 @@ import {
   openingHours,
   services,
   technologies,
+  TESTIMONIALS_ARE_FICTIONAL,
+  TESTIMONIALS_DISCLAIMER,
   testimonials,
   whatsappUrl,
 } from "@/lib/clinic";
@@ -340,7 +342,17 @@ export default function V1Page() {
               Quem passou por aqui
             </h2>
 
-            <div className="mt-14 grid gap-10 lg:grid-cols-3">
+            {/* Aviso obrigatório enquanto os depoimentos forem fictícios. */}
+            {TESTIMONIALS_ARE_FICTIONAL && (
+              <p className="mt-6 max-w-2xl border-l-2 border-primary/50 py-1 pl-4 text-xs leading-relaxed text-muted-foreground">
+                <span className="font-medium text-primary">
+                  Conteúdo fictício ·{" "}
+                </span>
+                {TESTIMONIALS_DISCLAIMER}
+              </p>
+            )}
+
+            <div className="mt-12 grid gap-10 lg:grid-cols-3">
               {testimonials.map((testimonial) => (
                 <figure
                   key={testimonial.quote.slice(0, 50)}

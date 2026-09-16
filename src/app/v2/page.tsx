@@ -26,6 +26,8 @@ import {
   openingHours,
   services,
   technologies,
+  TESTIMONIALS_ARE_FICTIONAL,
+  TESTIMONIALS_DISCLAIMER,
   testimonials,
   whatsappUrl,
 } from "@/lib/clinic";
@@ -368,9 +370,17 @@ export default function V2Page() {
               <h2 className="mt-6 font-heading text-3xl font-bold leading-tight sm:text-4xl">
                 O que elas contam depois
               </h2>
+
+              {/* Aviso obrigatório enquanto os depoimentos forem fictícios. */}
+              {TESTIMONIALS_ARE_FICTIONAL && (
+                <p className="mt-5 rounded-2xl bg-accent/60 px-5 py-3.5 text-xs leading-relaxed text-accent-foreground">
+                  <span className="font-bold">Conteúdo fictício · </span>
+                  {TESTIMONIALS_DISCLAIMER}
+                </p>
+              )}
             </div>
 
-            <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
               {testimonials.map((testimonial) => (
                 <figure
                   key={testimonial.quote.slice(0, 50)}
@@ -390,15 +400,15 @@ export default function V2Page() {
                   <figcaption className="mt-6 flex items-center gap-3 border-t border-border/70 pt-5">
                     <span
                       aria-hidden
-                      className="flex size-10 items-center justify-center rounded-full bg-accent font-heading text-sm font-bold text-accent-foreground"
+                      className="flex size-10 shrink-0 items-center justify-center rounded-full bg-accent font-heading text-sm font-bold text-accent-foreground"
                     >
-                      ?
+                      {testimonial.author.charAt(0)}
                     </span>
                     <span className="min-w-0 text-sm">
-                      <span className="block truncate font-bold">
+                      <span className="block font-bold">
                         {testimonial.author}
                       </span>
-                      <span className="block truncate text-muted-foreground">
+                      <span className="block leading-snug text-muted-foreground">
                         {testimonial.detail}
                       </span>
                     </span>
