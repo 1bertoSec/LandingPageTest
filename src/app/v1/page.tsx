@@ -8,7 +8,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
   FacebookIcon,
@@ -222,27 +221,39 @@ export default function V1Page() {
               </p>
             </div>
 
-            <div className="mt-14 grid gap-px border border-border/60 bg-border/60 sm:grid-cols-2 lg:grid-cols-3">
-              {services.map((service) => (
-                <Card
-                  key={service.slug}
-                  className="rounded-none border-0 bg-background shadow-none transition-colors hover:bg-secondary/40"
-                >
-                  <CardContent className="flex h-full flex-col gap-4 p-7">
-                    <ServiceIcon
-                      name={service.icon}
-                      className="size-6 text-primary"
-                    />
-                    <h3 className="font-heading text-2xl font-light leading-snug">
+            {/*
+              Lista editorial em vez de grade de cards: 10 itens numa grade de 3
+              colunas deixariam 2 células vazias, e cards de tamanho idêntico
+              achatam a hierarquia. Aqui o numeral e a régua fina fazem o ritmo,
+              e o nome do tratamento ganha escala tipográfica de verdade.
+            */}
+            <ol className="mt-14">
+              {services.map((service, index) => (
+                <li key={service.slug}>
+                  <article className="group grid grid-cols-[2.5rem_minmax(0,1fr)] items-baseline gap-x-4 gap-y-2 border-t border-border/60 py-7 transition-colors hover:border-primary/40 sm:grid-cols-[3.5rem_minmax(0,0.9fr)_minmax(0,1.1fr)] sm:gap-x-8 lg:grid-cols-[4.5rem_minmax(0,0.8fr)_minmax(0,1.2fr)]">
+                    <span
+                      aria-hidden
+                      className="font-heading text-sm tabular-nums text-primary/70 transition-colors group-hover:text-primary"
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <h3 className="flex items-baseline gap-3 font-heading text-2xl font-light leading-snug sm:text-[1.75rem]">
                       {service.name}
+                      <ServiceIcon
+                        name={service.icon}
+                        className="size-4 shrink-0 translate-y-px text-primary/50 transition-colors group-hover:text-primary"
+                      />
                     </h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
+
+                    <p className="col-start-2 text-sm leading-relaxed text-muted-foreground sm:col-start-3">
                       {service.short}
                     </p>
-                  </CardContent>
-                </Card>
+                  </article>
+                </li>
               ))}
-            </div>
+            </ol>
+            <div className="border-t border-border/60" />
           </div>
         </section>
 
